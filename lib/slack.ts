@@ -7,7 +7,7 @@ export const slack = new Hono()
 const SLACK_SINGING_SECRET = Deno.env.get("SLACK_SINGING_SECRET") ?? ""
 const SLACK_XOXB_TOKEN = Deno.env.get("SLACK_XOXB_TOKEN") ?? ""
 
-const URL_TO_UNFURL = 'http://joinmychannel.vic.wf/'
+const URL_TO_UNFURL = 'https://joinmychannel.vic.wf/'
 
 slack.use(async (c, next) => {
   const rawreqBody = await (await cloneRawRequest(c.req)).arrayBuffer()
@@ -41,7 +41,7 @@ slack.post("/events",async(c) => {
       return c.text(body["challenge"])
   } else if (body.type == "event_callback") {
 
-    unfurl(body.event.unfurl_id, body.event.source, body.event.links[0].url)
+    unfurl(body.event.unfurl_id, body.event.source, decodeURI(body.event.links[0].url))
 
     return c.text('')
   }
@@ -98,30 +98,32 @@ type SlackEventRes = LinkSharedEvent | UrlVerificationCallback
 
 
 async function unfurl(unfurl_id: string, source: 'conversations_history' | 'composer', urlToUnfurl: string) {
-  const res = await fetch('https://slack.com/api/chat.unfurl',{
-    method: "POST",
-    body: JSON.stringify({
-      token: SLACK_XOXB_TOKEN,
+  
+  const body=JSON.stringify({
       unfurl_id,
       source,
       user_auth_required: false,
       unfurls: {
         [urlToUnfurl]: {
-          hide_color: false,
           blocks:[
-            {
-  "type": "section",
-  "text": {
-    "type": "mrkdwn",
-    "text": "New Paid Time Off request from <example.com|Fred Enriquez>\n\n<https://example.com|View request>"
-  }
-}
+                            {
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": "Take a look at this carafe, just another cousin of glass"
+                    },
+                  }
           ]
         }
       }
-    }),
+    })
+    console.log(body)
+  
+  const res = await fetch('https://slack.com/api/chat.unfurl',{
+    method: "POST",
+    body,
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json; charset=utf-8",
       Authorization: `Bearer ${SLACK_XOXB_TOKEN}`
     }
   })
