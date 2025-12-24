@@ -1,6 +1,6 @@
 import "@std/dotenv/load"
 import { Hono } from 'hono'
-import {slack} from './lib/slack.ts'
+import {slack} from './lib/slack/router.ts'
 
 const app = new Hono()
 
