@@ -93,3 +93,43 @@ export function safeCompare(a: string, b:string): boolean {
 
   return timingSafeEqual(bufA,bufB)
 }
+
+export const ApprovalMessageBlocks = (user_id: string,text: string, approveButtonCaption:string,deleteButtonCaption:string)=> ([
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": text
+			}
+		},
+		{
+			"type": "divider"
+		},
+		{
+			"type": "actions",
+			"elements": [
+				{
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"text": approveButtonCaption,
+						"emoji": true
+					},
+          "style":"primary",
+					"value": user_id,
+					"action_id": "approve"
+				},
+				{
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"text": deleteButtonCaption,
+						"emoji": true
+					},
+          "style": "danger",
+					"value": user_id,
+					"action_id": "delete"
+				}
+			]
+		}
+	])

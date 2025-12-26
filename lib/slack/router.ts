@@ -3,7 +3,7 @@ import { Hono } from 'hono'
 import { cloneRawRequest } from "hono/request"
 import { env } from 'hono/adapter'
 import { createHmac } from "node:crypto";
-import { BlockActionInteractionPayload, safeCompare, SlackEventRes } from "./utils.ts";
+import { BlockActionInteractionPayload, safeCompare, SlackEventRes, ApprovalMessageBlocks } from "./utils.ts";
 import { deleteMessage, inviteUser, postMessage, unfurlById, updateMessage } from './methods.ts';
 import { stringify } from "node:querystring";
 
@@ -102,46 +102,9 @@ async function handleRequestButtonPayload(payload:BlockActionInteractionPayload,
 
       const text = (config["approvalMessage"]["text"] as string).replaceAll("{mention}",`<@${user.id}>`).replaceAll("{username}",user.username)
 
-      const ApprovalMsgBlocks: any[] = [
-		{
-			"type": "section",
-			"text": {
-				"type": "mrkdwn",
-				"text": text
-			}
-		},
-		{
-			"type": "divider"
-		},
-		{
-			"type": "actions",
-			"elements": [
-				{
-					"type": "button",
-					"text": {
-						"type": "plain_text",
-						"text": config["approvalMessage"]["approveButtonCaption"],
-						"emoji": true
-					},
-          "style":"primary",
-					"value": user.id,
-					"action_id": "approve"
-				},
-				{
-					"type": "button",
-					"text": {
-						"type": "plain_text",
-						"text": config["approvalMessage"]["deleteButtonCaption"],
-						"emoji": true
-					},
-          "style": "danger",
-					"value": user.id,
-					"action_id": "delete"
-				}
-			]
-		}
-	];
-      await postMessage(config["approvalMessage"]["channel"], ApprovalMsgBlocks, xoxb)
+      const approvalMessageBlocks = ApprovalMessageBlocks(user.id,text,config["approvalMessage"]["approveButtonCaption"],config["approvalMessage"]["deleteButtonCaption"])
+
+      await postMessage(config["approvalMessage"]["channel"], approvalMessageBlocks, xoxb)
 
       if (config["confirmationMessage"]) {
         await postMessage(user.id, config["confirmationMessage"], xoxb)
