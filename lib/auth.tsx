@@ -3,9 +3,15 @@ import { EnvT } from "./env.ts";
 import { env } from "hono/adapter";
 import { Layout } from "./browser.tsx";
 import { resolve } from "node:path";
+import { renderToReadableStream, Suspense } from "hono/jsx/streaming";
 
 const hono = new Hono()
 
+
+const TestC = async ({ text, delay }: { text: string; delay: number }) => {
+  await new Promise((resolve) => setTimeout(resolve, delay));
+  return <p style={{ color: "green" }}>{text}</p>;
+};
 
 
 hono.get("/redirect/slack", (c) => {
@@ -38,9 +44,34 @@ hono.get("/hackclub/callback", async (c) => {
         </Layout>)
     }
 
+    const stream = renderToReadableStream(
+        <Layout>
+            <p>Starting to do things</p>
+
+            <Suspense fallback={<p>failed</p>}>
+                <TestC text="First thing" delay={1000}/>
+            </Suspense>
+
+
+            <Suspense fallback={<></>}>
+                <TestC text={token.access_token} delay={100}/>
+            </Suspense>
+        </Layout>
+    )
     const token = await HCACodeToToken(code, HCA_CLIENT_ID, HCA_CLIENT_SECRET)
 
-    return c.text("")
+
+
+
+
+    
+    return c.body(stream, {
+        headers: {
+            "Content-Type":"text/html; charset=UTF-8",
+            "Transfer-Encoding": "Chunked"
+        }
+    })
+    return c.
 })
 
 export default hono;
