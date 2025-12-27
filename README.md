@@ -1,17 +1,22 @@
 # Join my channel
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=<your git repo URL>)
-s
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=)
 Easy and fast to deploy tool meant to replace private-channel join request Slack workflows. Built with serverless support in mind, using hono as it's only dependency (no bolt).
 
-## TODO
 
-- [x] Implement oauth for the website button
-- [ ] adapt it so it works well in cloudflare workers
-- [ ] create dockerfile because yes
-- [ ] make documentation to deploy your own instance
+> [!NOTE]
+> To deploy it, follow the guide at [/docs/deploy.md](./docs/deploy.md).
 
-## Start dev env
+## Contributing
+
+To set up a dev environment, populate the `.env` and
+for deno,
 
 ```sh
 deno task start
+```
+
+for cloudflare workers,
+
+```sh
+npx wrangler dev
 ```

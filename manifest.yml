@@ -1,21 +1,21 @@
 display_information:
-  name: Join the vic channel
+  name: CHANGEME
 features:
   bot_user:
-    display_name: Join the vic channel
+    display_name: CHANGEME
     always_online: false
   unfurl_domains:
-    - join.vic.wf
+    - CHANGEME (deployment domain. Do not include protcol i.e. 'example.com')
 oauth_config:
   redirect_urls:
-    - /slack/redirect
+    - /slack/redirect # CHANGEME - prefix with deployment host i.e. 'https://example.com/slack/redirect'
   scopes:
     user:
       - users.profile:read
       - users.profile:write
       - links:read
       - links:write
-    bot:
+    bot: 
       - app_mentions:read
       - links:read
       - links:write
@@ -24,14 +24,14 @@ oauth_config:
       - chat:write
 settings:
   event_subscriptions:
-    request_url: /slack/events
+    request_url: /slack/events # CHANGEME - prefix with deployment host i.e. 'https://example.com/slack/events'
     user_events:
       - link_shared
     bot_events:
       - link_shared
   interactivity:
     is_enabled: true
-    request_url: /slack/interactivity
+    request_url: /slack/interactivity # CHANGEME - prefix with deployment host i.e. 'https://example.com/slack/interactivity'
   org_deploy_enabled: false
   socket_mode_enabled: false
   token_rotation_enabled: false
