@@ -1,0 +1,52 @@
+:root {
+    --focus-outlineColor: #0969da;
+}
+
+body {
+background-color: #f0eef1;
+padding: 20px 50px;
+margin: 0 auto;
+max-width: 800px;
+}
+h1 {
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+.body {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.hca-button {
+    background-color: rgb(236, 55, 80);
+    border: none;
+    font-weight: bold;
+    color: white;       
+    padding: 15px 18px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    cursor: pointer;
+
+    border-radius: 12px;
+}
+.hca-button, img {
+    display: inline-block;
+    vertical-align: middle;
+    border: 1px solid white;
+    margin-right: 10px;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #1e1e1e;
+        color: white;
+    }
+
+    .hca-button {
+        color: white;
+    }
+
+}

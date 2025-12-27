@@ -5,7 +5,6 @@ import { env } from 'hono/adapter'
 import { createHmac } from "node:crypto";
 import { BlockActionInteractionPayload, safeCompare, SlackEventRes, ApprovalMessageBlocks } from "./utils.ts";
 import { deleteMessage, inviteUser, postMessage, unfurlById, updateMessage } from './methods.ts';
-import { stringify } from "node:querystring";
 
 const slack = new Hono()
 
