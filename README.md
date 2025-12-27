@@ -1,5 +1,7 @@
 # Join my channel
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=)
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https%3A%2F%2Fgithub.com%2Fv1ctorio%2Fjoin-my-channel)
+
+
 Easy and fast to deploy tool meant to replace private-channel join request Slack workflows. Built with serverless support in mind, using hono as it's only dependency (no bolt).
 
 
