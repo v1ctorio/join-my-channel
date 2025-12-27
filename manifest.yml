@@ -5,7 +5,7 @@ features:
     display_name: Join the vic channel
     always_online: false
   unfurl_domains:
-    - joinmychannel.vic.wf
+    - join.vic.wf
 oauth_config:
   redirect_urls:
     - /slack/redirect

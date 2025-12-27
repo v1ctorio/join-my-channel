@@ -32,6 +32,9 @@ export const getSite = createMiddleware(async (c) => {
 
 const LogInWithHackClubButton: FC= (props) => {
 
-    return <a href="/auth/hackclub"> <button type="button" class="hca-button"><img src="https://assets.hackclub.com/icon-square.svg" alt="Hack Club logo" height={30}/>Execute with Hack Club</button> </a>
+    return <a href="/auth/hackclub"> <button type="button" class="hca-button">
+        <img  loading="lazy"src="https://assets.hackclub.com/icon-square.svg" alt="Hack Club logo" height={30} width={30}/>
+        Execute with Hack Club
+        </button> </a>
 
 }
