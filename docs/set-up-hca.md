@@ -8,13 +8,13 @@ In your [Hack Club account identity page](https://auth.hackclub.com/identity/edi
 Subsequently, in the [Developer tab](https://auth.hackclub.com/developer/apps) click on "app me up!". Create your app. 
 
 - In the *Scopes* section, only select `openid` and `slack_id`
-![scopes section screenshot](hca-required-scopes.png)
+![scopes section screenshot](images/hca-required-scopes.png)
 - In the *Required URI(s)* section input the following URL: `<deployment-host>/auth/hackclub/callback`
-![redirect uri section screenshot](hca-redirect-uri.png)
+![redirect uri section screenshot](images/hca-redirect-uri.png)
 
 ### Set up env vars
 Once created, you will be provided with your app's OAuth credentials. 
-![OAuth credentials screenshot](hca-oauth-creds.png)
+![OAuth credentials screenshot](images/hca-oauth-creds.png)
 
 Now, add the secrets as their respective environment variables to your deployment: `HCA_CLIENT_SECRET`, `HCA_CLIENT_ID`, `HCA_REDIRECT_URI`.
 
