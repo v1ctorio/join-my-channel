@@ -8,6 +8,7 @@ Easy and fast to deploy tool meant to replace private-channel join request Slack
 > [!NOTE]
 > To deploy it, follow the guide at [/docs/deploy.md](./docs/deploy.md).
 
+And, **this is just a blueprint**. If you use this you totally should edit some of the code to make it more your own. If you need any help, ask me!
 ## Contributing
 
 To set up a dev environment, populate the `.env` and
